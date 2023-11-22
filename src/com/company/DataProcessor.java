@@ -60,8 +60,7 @@ public class DataProcessor {
                 .filter(customer -> customer.getDislikedMovies().contains(targetMovie))
                 .mapToDouble(Customer::getAge)
                 .average()
-                .orElse(0); //This handles the empty result; It is providing a default value if the stream is empty.
-        //Somehow it does not work without it!!!
+                .orElseThrow(); //This handles the empty result;
         //DONE
     }
 
@@ -73,8 +72,7 @@ public class DataProcessor {
         return customers.stream()
                 .mapToDouble(Customer::getAge)
                 .average()
-                .orElse(0);//This handles the empty result; It is providing a default value if the stream is empty.
-        //Somehow it does not work without it!!!
+                .orElseThrow();//This handles the empty result;
     }
 
     /**
@@ -105,7 +103,7 @@ public class DataProcessor {
      */
     public static Customer findTheCustomerWithTheLongestName(List<Customer> customers) {
         return customers.stream()
-                .reduce((c1, c2) -> c1.getName().length() > c2.getName().length() ? c1 : c2).orElse(null);
+                .reduce((c1, c2) -> c1.getName().length() > c2.getName().length() ? c1 : c2).orElseThrow();
         //DONE
     }
 
